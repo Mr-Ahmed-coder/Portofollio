@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
-  { value: "280+", label: "Google Review" },
-  { value: "15+", label: "Years Experience" },
-  { value: "49+", label: "Award Winning" },
+  { value: "5 +", label: "Coursera" },
+  { value: "3 +", label: "Years Experience" },
+  { value: "30 +", label: "Projects Build" },
 ];
 
 const About = () => {
