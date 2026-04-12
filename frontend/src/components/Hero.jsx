@@ -30,7 +30,7 @@ const Hero = () => {
   }, [typedText, isDeleting, wordIndex]);
 
   return (
-    <section id="home" style={{
+    <section id="home" className="hero-padding flex-stack-tablet" style={{
       minHeight: "100vh",
       background: "linear-gradient(135deg, #080d1e 0%, #0d1535 50%, #0a1628 100%)",
       display: "flex",
@@ -81,7 +81,7 @@ const Hero = () => {
  </div>
 
         {/* Main Heading */}
-        <h1 style={{
+        <h1 className="hero-title" style={{
           margin: "0 0 8px 0",
           fontSize: "clamp(40px, 5vw, 68px)",
           fontWeight: "900",
@@ -95,7 +95,7 @@ const Hero = () => {
         </h1>
 
         {/* Typing line */}
-        <h2 style={{
+        <h2 className="hero-subtitle" style={{
           margin: "0 0 24px 0",
           fontSize: "clamp(36px, 4.5vw, 62px)",
           fontWeight: "900",
@@ -132,7 +132,7 @@ const Hero = () => {
         </p>
 
         {/* CTA + Socials */}
-        <div style={{ display: "flex", alignItems: "center", gap: "24px", flexWrap: "wrap" }}>
+        <div className="flex-stack flex-center-mobile" style={{ display: "flex", alignItems: "center", gap: "24px", flexWrap: "wrap" }}>
           <button style={{
             display: "flex", alignItems: "center", gap: "10px",
             padding: "14px 32px",
@@ -189,7 +189,7 @@ const Hero = () => {
       </div>
 
       {/* Right — Profile Image Area */}
-      <div style={{
+      <div className="hero-img-tablet" style={{
         flex: 1,
         display: "flex",
         justifyContent: "center",

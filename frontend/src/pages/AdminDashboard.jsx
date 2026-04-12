@@ -15,6 +15,7 @@ const AdminDashboard = () => {
   const { admin, logout } = useAuth();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("projects");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -36,7 +37,7 @@ const AdminDashboard = () => {
     }}>
 
       {/* Sidebar */}
-      <aside style={{
+      <aside className={sidebarOpen ? "admin-sidebar open" : "admin-sidebar"} style={{
         width: "240px",
         background: "rgba(15,27,48,0.95)",
         borderRight: "1px solid rgba(14,165,233,0.12)",
@@ -80,7 +81,10 @@ const AdminDashboard = () => {
           {navItems.map((item) => (
             <button
               key={item.id}
-              onClick={() => setActiveTab(item.id)}
+              onClick={() => {
+                setActiveTab(item.id);
+                setSidebarOpen(false);
+              }}
               style={{
                 width: "100%",
                 display: "flex",
@@ -165,34 +169,43 @@ const AdminDashboard = () => {
         </div>
       </aside>
 
+      {/* Mobile Overlay */}
+      {sidebarOpen && <div className="hide-on-desktop" onClick={() => setSidebarOpen(false)} style={{ position:"fixed", top:0, left:0, right:0, bottom:0, background:"rgba(0,0,0,0.5)", zIndex:99 }} />}
+
       {/* Main content */}
-      <main style={{
+      <main className="admin-main section-padding" style={{
         marginLeft: "240px",
         flex: 1,
         padding: "40px",
         overflowY: "auto",
       }}>
         {/* Top bar */}
-        <div style={{
+        <div className="flex-center-mobile" style={{
           marginBottom: "32px",
           paddingBottom: "20px",
           borderBottom: "1px solid rgba(14,165,233,0.1)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
         }}>
-          <h1 style={{
-            color: "#ffffff",
-            fontSize: "28px",
-            fontWeight: "900",
-            fontFamily: "'Barlow Condensed', sans-serif",
-            textTransform: "uppercase",
-            letterSpacing: "1px",
-            margin: 0,
-          }}>
-            {navItems.find(n => n.id === activeTab)?.icon}{" "}
-            {navItems.find(n => n.id === activeTab)?.label}
-          </h1>
-          <p style={{ color: "#475569", fontSize: "13px", margin: "4px 0 0", fontFamily: "'Barlow', sans-serif" }}>
-            Manage your portfolio {activeTab}
-          </p>
+          <div>
+            <h1 className="section-title" style={{
+              color: "#ffffff",
+              fontSize: "28px",
+              fontWeight: "900",
+              fontFamily: "'Barlow Condensed', sans-serif",
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+              margin: 0,
+            }}>
+              {navItems.find(n => n.id === activeTab)?.icon}{" "}
+              {navItems.find(n => n.id === activeTab)?.label}
+            </h1>
+            <p className="hide-on-mobile" style={{ color: "#475569", fontSize: "13px", margin: "4px 0 0", fontFamily: "'Barlow', sans-serif" }}>
+              Manage your portfolio {activeTab}
+            </p>
+          </div>
+          <button className="hide-on-desktop" onClick={() => setSidebarOpen(!sidebarOpen)} style={{ background:"transparent", color:"#fff", fontSize:"24px", border:"none" }}>☰</button>
         </div>
 
         {/* Active tab content */}

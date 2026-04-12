@@ -122,7 +122,7 @@ const About = () => {
         </div>
 
         {/* Heading */}
-        <h2 style={{
+        <h2 className="section-title" style={{
           fontSize: "clamp(28px, 3.5vw, 46px)",
           fontWeight: "900",
           color: "#ffffff",

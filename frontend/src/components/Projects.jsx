@@ -81,7 +81,7 @@ const Projects = () => {
           MY WORK
         </div>
 
-        <h2 style={{
+        <h2 className="section-title" style={{
           fontSize: "clamp(28px, 4vw, 48px)",
           fontWeight: "900",
           color: "#ffffff",

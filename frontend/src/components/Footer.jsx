@@ -7,7 +7,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer style={{
+    <footer className="section-padding" style={{
       background: "#060b18",
       borderTop: "1px solid rgba(14,165,233,0.12)",
       padding: "60px 60px 30px",
@@ -25,7 +25,7 @@ const Footer = () => {
       {/* Main footer content */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: "1.5fr 1fr 1fr",
+        gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))",
         gap: "60px",
         marginBottom: "50px",
       }}>
@@ -188,11 +188,7 @@ const Footer = () => {
       }} />
 
       {/* Bottom bar */}
-      <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        flexWrap: "wrap",
+      <div className="flex-stack flex-center-mobile" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap",
         gap: "12px",
       }}>
         <p style={{

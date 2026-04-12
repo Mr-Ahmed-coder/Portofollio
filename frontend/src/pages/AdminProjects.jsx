@@ -183,7 +183,7 @@ const AdminProjects = () => {
             {editId ? "Edit Project" : "New Project"}
           </h3>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+          <div className="grid-2-to-1-tablet" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
             <div>
               <label style={labelStyle}>Title *</label>
               <input

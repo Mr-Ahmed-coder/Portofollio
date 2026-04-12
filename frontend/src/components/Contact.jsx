@@ -68,10 +68,7 @@ const Contact = () => {
   };
 
   return (
-    <section
-      id="contact"
-      ref={sectionRef}
-      style={{
+    <section id="contact" ref={sectionRef} className="section-padding" style={{
         background: "linear-gradient(180deg, #0d1535 0%, #080d1e 100%)",
         padding: "100px 60px",
         position: "relative",
@@ -116,8 +113,7 @@ const Contact = () => {
           CONTACT
         </div>
 
-        <h2
-          style={{
+        <h2 className="section-title" style={{
             fontSize: "clamp(28px, 4vw, 48px)",
             fontWeight: "900",
             color: "#ffffff",
@@ -133,7 +129,7 @@ const Contact = () => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 320px), 1fr))",
           gap: "60px",
           alignItems: "start",
         }}
@@ -246,7 +242,7 @@ const Contact = () => {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 180px), 1fr))",
               gap: "16px",
               marginBottom: "16px",
             }}

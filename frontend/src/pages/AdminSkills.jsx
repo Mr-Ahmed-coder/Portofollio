@@ -117,7 +117,7 @@ const AdminSkills = () => {
             {editId ? "✏️ Edit Skill" : "➕ New Skill"}
           </h3>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+          <div className="grid-2-to-1-tablet" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
             <div>
               <label style={labelStyle}>Skill Name *</label>
               <input name="name" value={form.name} onChange={handleChange}

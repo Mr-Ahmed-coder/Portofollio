@@ -1,72 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800;900&display=swap');
+const fs = require('fs');
+let css = fs.readFileSync('frontend/src/index.css', 'utf8');
+css += \
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  --bg-primary: #080d1e;
-  --bg-secondary: #0d1535;
-  --bg-card: #0f1b30;
-  --accent-blue: #0ea5e9;
-  --accent-blue-dark: #0369a1;
-  --text-white: #ffffff;
-  --text-gray: #94a3b8;
-  --text-muted: #475569;
-  --border: rgba(14, 165, 233, 0.15);
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-white);
-  font-family: 'Barlow', sans-serif;
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  outline: none;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--accent-blue);
-  border-radius: 3px;
-}
-
-/* Responsive Utility Classes */
-@media (min-width: 769px) {
-  .hide-on-desktop { display: none !important; }
-}
-
+/* Responsive Utility Classes Framework */
 @media (max-width: 1024px) {
   .section-padding { padding: 80px 40px !important; }
   .grid-2-to-1-tablet { grid-template-columns: 1fr !important; }
@@ -91,7 +27,10 @@ img {
   .text-sm-mobile { font-size: 14px !important; }
   /* Admin sidebar */
   .admin-sidebar { position: fixed !important; transform: translateX(-100%); transition: transform 0.3s; z-index: 100; }
-  .admin-sidebar.open { transform: translateX(0) !important; }
-  .admin-main { margin-left: 0 !important; padding: 20px !important; }
+  .admin-sidebar.open { transform: translateX(0); }
   .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 }
+\;
+fs.writeFileSync('frontend/src/index.css', css);
+console.log('done css');
+\
