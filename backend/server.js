@@ -16,10 +16,11 @@ const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173,http
 
 const corsOptions = {
   origin(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    // In monolithic production, we can safely allow the same origin. 
+    // If no origin is provided (direct hit) or we are in prod, allow it.
+    if (!origin || process.env.NODE_ENV === "production" || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-
     return callback(new Error("Not allowed by CORS"));
   },
 };
