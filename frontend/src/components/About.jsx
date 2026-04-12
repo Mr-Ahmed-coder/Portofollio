@@ -80,7 +80,7 @@ const About = () => {
           overflow: "hidden",
           boxShadow: "0 24px 80px rgba(0,0,0,0.4), 0 0 40px rgba(14,165,233,0.08)",
           position: "relative", zIndex: 2,
-          backgroundImage: "url('/src/images/image2.jpeg')",
+          backgroundImage: "url('/images/image2.jpeg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           border: "4px solid skyblue",

@@ -249,7 +249,7 @@ const Hero = () => {
             background: "linear-gradient(180deg, #0d1f3c 0%, #162444 100%)",
             display: "flex", alignItems: "center", justifyContent: "center",
             flexDirection: "column", gap: "12px",
-            backgroundImage: "url('/src/images/image2.jpeg')",
+            backgroundImage: "url('/images/image2.jpeg')",
             backgroundSize: "cover",
             backgroundPosition: "center",
             border: "4px solid #1877f2",
