@@ -1,0 +1,28 @@
+# root .gitignore
+
+# Node environment
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment Variables
+.env
+.env.*.local
+.env.local
+
+# Frontend Build
+frontend/dist/
+frontend/dist-ssr/
+
+# Backend Uploads
+backend/uploads/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/
+*.suo
+*.sln
