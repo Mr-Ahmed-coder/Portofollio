@@ -81,7 +81,7 @@ const Navbar = () => {
       </ul>
 
       {/* CTA Button */}
-      <button style={{
+      <button className="hide-on-mobile" style={{
         padding: "12px 28px",
         background: "linear-gradient(135deg, #0ea5e9, #0369a1)",
         color: "#fff",
@@ -130,7 +130,7 @@ const Navbar = () => {
       </button>
 
       {/* Mobile Menu Overlay */}
-      <div style={{
+      <div className="hide-on-desktop" style={{
         position: "fixed",
         top: 0,
         left: 0,

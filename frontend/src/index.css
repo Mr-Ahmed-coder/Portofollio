@@ -63,7 +63,7 @@ img {
 }
 
 /* Responsive Utility Classes */
-@media (min-width: 769px) {
+@media (min-width: 1025px) {
   .hide-on-desktop { display: none !important; }
 }
 
@@ -72,14 +72,14 @@ img {
   .grid-2-to-1-tablet { grid-template-columns: 1fr !important; }
   .flex-stack-tablet { flex-direction: column !important; align-items: flex-start !important; }
   .hero-img-tablet { width: 100% !important; max-width: 380px !important; margin: 0 auto !important; }
+  .hide-on-mobile { display: none !important; }
+  .show-on-mobile { display: flex !important; }
 }
 
 @media (max-width: 768px) {
   .section-padding { padding: 60px 20px !important; }
   .hero-padding { padding: 120px 20px 40px !important; }
   .flex-stack { flex-direction: column !important; align-items: flex-start !important; }
-  .hide-on-mobile { display: none !important; }
-  .show-on-mobile { display: flex !important; }
   .nav-padding { padding: 16px 20px !important; }
   .full-width { width: 100% !important; }
   .text-center-mobile { text-align: center !important; }
