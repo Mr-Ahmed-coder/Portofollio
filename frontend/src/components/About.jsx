@@ -24,6 +24,7 @@ const About = () => {
     <section
       id="about-me"
       ref={sectionRef}
+      className="section-padding flex-stack-tablet"
       style={{
         background: "linear-gradient(180deg, #080d1e 0%, #0d1535 100%)",
         padding: "100px 60px",

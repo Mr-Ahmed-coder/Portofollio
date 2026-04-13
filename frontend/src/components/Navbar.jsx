@@ -114,7 +114,7 @@ const Navbar = () => {
       <button 
         className="hide-on-desktop"
         style={{
-          display: "none",
+          display: "flex",
           flexDirection: "column",
           gap: "5px",
           background: "transparent",
