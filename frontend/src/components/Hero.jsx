@@ -35,7 +35,7 @@ const Hero = () => {
       background: "linear-gradient(135deg, #080d1e 0%, #0d1535 50%, #0a1628 100%)",
       display: "flex",
       alignItems: "center",
-      padding: "0 60px",
+      padding: "120px 60px 40px",
       position: "relative",
       overflow: "hidden",
     }}>

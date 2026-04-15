@@ -129,18 +129,21 @@ const Navbar = () => {
         <div style={{ width: "24px", height: "2px", background: "#fff", transition: "all 0.3s", transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
       </button>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Dropdown */}
       <div className="hide-on-desktop" style={{
-        position: "fixed",
-        top: 0,
+        position: "absolute",
+        top: "100%",
         left: 0,
         right: 0,
-        bottom: 0,
         background: "rgba(8, 13, 30, 0.98)",
         backdropFilter: "blur(10px)",
-        transform: menuOpen ? "translateY(0)" : "translateY(-100%)",
-        transition: "transform 0.4s ease",
-        zIndex: 999,
+        transform: menuOpen ? "translateY(0)" : "translateY(-150%)",
+        visibility: menuOpen ? "visible" : "hidden",
+        opacity: menuOpen ? 1 : 0,
+        transition: "all 0.4s ease",
+        borderBottom: "1px solid rgba(14, 165, 233, 0.15)",
+        zIndex: 998,
+        padding: "30px 0",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
