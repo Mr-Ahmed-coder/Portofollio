@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import api from "../lib/api";
+
+const contactEmail = "engahmedmohamedali24@gmail.com";
 
 const infoItems = [
   { icon: "L", label: "Location", value: "Kampala, Uganda" },
@@ -35,7 +36,7 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     const { name, email, subject, message } = formData;
 
     if (!name || !email || !subject || !message) {
@@ -43,14 +44,14 @@ const Contact = () => {
       return;
     }
 
-    setStatus("loading");
-    try {
-      await api.post("/api/contact", formData);
-      setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch {
-      setStatus("error");
-    }
+    const emailSubject = encodeURIComponent(subject);
+    const emailBody = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\n${message}`
+    );
+
+    window.location.href = `mailto:${contactEmail}?subject=${emailSubject}&body=${emailBody}`;
+    setStatus("success");
+    setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
   const inputStyle = {
@@ -385,7 +386,7 @@ const Contact = () => {
                 marginBottom: "16px",
               }}
             >
-              Message sent successfully. I&apos;ll get back to you soon.
+              Your email app is opening. Send the drafted message to reach me directly.
             </div>
           )}
 
@@ -402,7 +403,7 @@ const Contact = () => {
                 marginBottom: "16px",
               }}
             >
-              Something went wrong. Please try again.
+              Unable to open your email app. You can email me directly at engahmedmohamedali24@gmail.com.
             </div>
           )}
 
@@ -465,3 +466,5 @@ const Contact = () => {
 };
 
 export default Contact;
+
+

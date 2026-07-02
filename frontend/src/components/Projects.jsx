@@ -1,28 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import api, { resolveMediaUrl } from "../lib/api";
+import projectsData from "../data/projects";
 
 const Projects = () => {
-  const [projects, setProjects] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
-  const [error, setError] = useState("");
   const sectionRef = useRef(null);
+  const projects = [...projectsData].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
-  // Fetch projects from the backend
-  useEffect(() => {
-    api
-      .get("/api/projects")
-      .then((res) => {
-        setProjects(res.data.projects);
-        setError("");
-      })
-      .catch(() => {
-        setProjects([]);
-        setError("Projects are unavailable right now. Please try again later.");
-      });
-  }, []);
-
-  // Scroll into view animation
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => { if (entry.isIntersecting) setVisible(true); },
@@ -32,7 +16,6 @@ const Projects = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Show 3 cards at a time
   const cardsPerPage = 3;
   const totalPages = Math.ceil(projects.length / cardsPerPage);
   const visibleProjects = projects.slice(
@@ -51,7 +34,6 @@ const Projects = () => {
         overflow: "hidden",
       }}
     >
-      {/* Background glow */}
       <div style={{
         position: "absolute", top: "20%", right: "0",
         width: "350px", height: "350px",
@@ -59,7 +41,6 @@ const Projects = () => {
         pointerEvents: "none",
       }} />
 
-      {/* Section label */}
       <div style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(20px)",
@@ -94,22 +75,6 @@ const Projects = () => {
         </h2>
       </div>
 
-      {/* Project Cards */}
-      {error && (
-        <div style={{
-          marginBottom: "24px",
-          padding: "14px 18px",
-          background: "rgba(239,68,68,0.08)",
-          border: "1px solid rgba(239,68,68,0.25)",
-          borderRadius: "10px",
-          color: "#f87171",
-          fontSize: "13px",
-          fontFamily: "'Barlow', sans-serif",
-        }}>
-          {error}
-        </div>
-      )}
-
       <div style={{
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
@@ -120,11 +85,11 @@ const Projects = () => {
         transition: "all 0.7s ease 0.2s",
       }}>
         {visibleProjects.map((project, i) => (
-          <ProjectCard key={project._id} project={project} index={i} />
+          <ProjectCard key={project.id} project={project} index={i} />
         ))}
       </div>
 
-      {!error && projects.length === 0 && (
+      {projects.length === 0 && (
         <div style={{
           textAlign: "center",
           color: "#64748b",
@@ -136,7 +101,6 @@ const Projects = () => {
         </div>
       )}
 
-      {/* Carousel Dots */}
       {totalPages > 1 && (
         <div style={{
           display: "flex",
@@ -149,6 +113,7 @@ const Projects = () => {
             <button
               key={i}
               onClick={() => setActiveIndex(i)}
+              aria-label={`Show project page ${i + 1}`}
               style={{
                 width: i === activeIndex ? "28px" : "10px",
                 height: "10px",
@@ -167,7 +132,6 @@ const Projects = () => {
   );
 };
 
-// Individual Project Card
 const ProjectCard = ({ project, index }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -186,7 +150,6 @@ const ProjectCard = ({ project, index }) => {
         animationDelay: `${index * 0.1}s`,
       }}
     >
-      {/* Image area */}
       <div style={{
         height: "200px",
         background: "linear-gradient(135deg, #0d1f3c, #162444)",
@@ -207,14 +170,13 @@ const ProjectCard = ({ project, index }) => {
             display: "flex", flexDirection: "column",
             alignItems: "center", gap: "8px",
           }}>
-            <div style={{ fontSize: "40px", opacity: 0.4 }}>🖥️</div>
+            <div style={{ fontSize: "40px", opacity: 0.4 }}>Image</div>
             <span style={{ color: "#334155", fontSize: "12px", fontFamily: "'Barlow', sans-serif" }}>
               Project Image
             </span>
           </div>
         )}
 
-        {/* Hover overlay */}
         <div style={{
           position: "absolute", inset: 0,
           background: "rgba(14,165,233,0.08)",
@@ -223,12 +185,12 @@ const ProjectCard = ({ project, index }) => {
         }} />
       </div>
 
-      {/* Card Footer */}
       <div style={{
         padding: "18px 20px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
+        gap: "16px",
       }}>
         <div>
           <h3 style={{
@@ -250,11 +212,11 @@ const ProjectCard = ({ project, index }) => {
           </p>
         </div>
 
-        {/* Arrow button */}
         <a
           href={project.liveUrl || "#"}
-          target="_blank"
-          rel="noreferrer"
+          target={project.liveUrl && project.liveUrl !== "#" ? "_blank" : undefined}
+          rel={project.liveUrl && project.liveUrl !== "#" ? "noreferrer" : undefined}
+          aria-label={`Open ${project.title}`}
           style={{
             width: "40px", height: "40px",
             borderRadius: "50%",
@@ -269,7 +231,7 @@ const ProjectCard = ({ project, index }) => {
             transform: hovered ? "scale(1.12)" : "scale(1)",
           }}
         >
-          →
+          -&gt;
         </a>
       </div>
     </div>

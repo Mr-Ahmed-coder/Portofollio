@@ -1,86 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import api from "../lib/api";
-
-const fallbackSkills = [
-  {
-    category: "Frontend",
-    description: "Building modern, responsive user interfaces for smooth user experiences.",
-    skills: [
-      { name: "React", level: 90 },
-      { name: "HTML", level: 95 },
-      { name: "CSS", level: 92 },
-      { name: "JavaScript", level: 88 },
-    ],
-  },
-  {
-    category: "Backend",
-    description: "Creating reliable server-side logic and APIs for scalable web applications.",
-    skills: [
-      { name: "Node.js", level: 85 },
-      { name: "Express", level: 82 },
-    ],
-  },
-  {
-    category: "Database",
-    description: "Managing application data with flexible and efficient document databases.",
-    skills: [
-      { name: "MongoDB", level: 80 },
-    ],
-  },
-  {
-    category: "Other",
-    description: "Supporting tools and practices that strengthen delivery and integration.",
-    skills: [
-      { name: "Git", level: 86 },
-      { name: "API Integration", level: 88 },
-      { name: "Responsive Design", level: 90 },
-    ],
-  },
-];
-
-const normalizeSkills = (items) => {
-  if (!Array.isArray(items) || items.length === 0) {
-    return fallbackSkills;
-  }
-
-  const grouped = items.reduce((acc, item) => {
-    const category = item.category || "Other";
-    if (!acc[category]) {
-      acc[category] = {
-        category,
-        description: getCategoryDescription(category),
-        skills: [],
-      };
-    }
-
-    acc[category].skills.push({
-      name: item.name,
-      level: typeof item.proficiency === "number" ? item.proficiency : 80,
-    });
-
-    return acc;
-  }, {});
-
-  const categories = Object.values(grouped);
-  return categories.length > 0 ? categories : fallbackSkills;
-};
-
-const getCategoryDescription = (category) => {
-  switch (category.toLowerCase()) {
-    case "frontend":
-      return "Building modern, responsive user interfaces for smooth user experiences.";
-    case "backend":
-      return "Creating reliable server-side logic and APIs for scalable web applications.";
-    case "database":
-      return "Managing application data with flexible and efficient document databases.";
-    default:
-      return "Supporting tools and practices that strengthen delivery and integration.";
-  }
-};
+import skillGroups from "../data/skills";
 
 const Skills = () => {
   const [visible, setVisible] = useState(false);
-  const [skillGroups, setSkillGroups] = useState(fallbackSkills);
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -93,29 +15,6 @@ const Skills = () => {
 
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    let active = true;
-
-    const loadSkills = async () => {
-      try {
-        const { data } = await api.get("/api/skills");
-        if (active) {
-          setSkillGroups(normalizeSkills(data));
-        }
-      } catch {
-        if (active) {
-          setSkillGroups(fallbackSkills);
-        }
-      }
-    };
-
-    loadSkills();
-
-    return () => {
-      active = false;
-    };
   }, []);
 
   return (
