@@ -32,7 +32,7 @@ const Hero = () => {
   return (
     <section id="home" className="hero-padding flex-stack-tablet" style={{
       minHeight: "100vh",
-      background: "linear-gradient(135deg, #080d1e 0%, #0d1535 50%, #0a1628 100%)",
+      background: "linear-gradient(135deg, #0B0B0B 0%, #111111 50%, #111111 100%)",
       display: "flex",
       alignItems: "center",
       padding: "120px 60px 40px",
@@ -222,7 +222,7 @@ const Hero = () => {
             position: "absolute",
             width: ball.size, height: ball.size,
             borderRadius: "50%",
-            background: "radial-gradient(circle at 35% 35%, #1a3a4a, #0a1a25)",
+            background: "radial-gradient(circle at 35% 35%, #222222, #111111)",
             boxShadow: "inset -4px -4px 12px rgba(0,0,0,0.5), inset 4px 4px 12px rgba(14,165,233,0.1), 0 8px 32px rgba(0,0,0,0.4)",
             top: ball.top,
             left: ball.left,
@@ -246,7 +246,7 @@ const Hero = () => {
 
           <div style={{
             width: "100%", height: "100%",
-            background: "linear-gradient(180deg, #0d1f3c 0%, #162444 100%)",
+            background: "linear-gradient(180deg, #181818 0%, #222222 100%)",
             display: "flex", alignItems: "center", justifyContent: "center",
             flexDirection: "column", gap: "12px",
             backgroundImage: "url('/images/image2.jpeg')",
@@ -256,7 +256,7 @@ const Hero = () => {
           }}>
             <div style={{ fontSize: "64px" }}></div>
             <p style={{
-              color: "#475569", fontSize: "13px",
+              color: "#7A7A7A", fontSize: "13px",
               fontFamily: "'Barlow', sans-serif",
               textAlign: "center", padding: "0 20px",
             }}>
@@ -288,3 +288,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
+

@@ -26,7 +26,7 @@ const About = () => {
       ref={sectionRef}
       className="section-padding flex-stack-tablet"
       style={{
-        background: "linear-gradient(180deg, #080d1e 0%, #0d1535 100%)",
+        background: "linear-gradient(180deg, #0B0B0B 0%, #111111 100%)",
         padding: "100px 60px",
         display: "flex",
         alignItems: "center",
@@ -92,7 +92,7 @@ const About = () => {
           
           {/* <img s  src="images/image1.jpeg" style={{ width:"100%", height:"100%", objectFit:"cover" }} /> */}
           <div style={{ fontSize: "64px" }}></div>
-          <p style={{ color: "#475569", fontSize: "13px", fontFamily: "'Barlow', sans-serif" }}>
+          <p style={{ color: "#7A7A7A", fontSize: "13px", fontFamily: "'Barlow', sans-serif" }}>
             
           </p>
         </div>
@@ -187,7 +187,7 @@ const About = () => {
                 letterSpacing: "1px",
               }}>{stat.value}</div>
               <div style={{
-                fontSize: "11px", color: "#64748b",
+                fontSize: "11px", color: "#8A8A8A",
                 fontFamily: "'Barlow', sans-serif",
                 marginTop: "4px", letterSpacing: "0.5px",
               }}>{stat.label}</div>
@@ -239,3 +239,4 @@ const About = () => {
 };
 
 export default About;
+

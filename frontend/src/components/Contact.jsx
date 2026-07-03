@@ -70,7 +70,7 @@ const Contact = () => {
 
   return (
     <section id="contact" ref={sectionRef} className="section-padding" style={{
-        background: "linear-gradient(180deg, #0d1535 0%, #080d1e 100%)",
+        background: "linear-gradient(180deg, #111111 0%, #0B0B0B 100%)",
         padding: "100px 60px",
         position: "relative",
         overflow: "hidden",
@@ -201,7 +201,7 @@ const Contact = () => {
                 <div>
                   <div
                     style={{
-                      color: "#64748b",
+                      color: "#8A8A8A",
                       fontSize: "11px",
                       fontFamily: "'Barlow', sans-serif",
                       letterSpacing: "1px",
@@ -234,7 +234,7 @@ const Contact = () => {
             opacity: visible ? 1 : 0,
             transform: visible ? "translateX(0)" : "translateX(40px)",
             transition: "all 0.7s ease 0.3s",
-            background: "rgba(15,27,48,0.8)",
+            background: "rgba(24,24,24,0.8)",
             border: "1px solid rgba(14,165,233,0.15)",
             borderRadius: "20px",
             padding: "40px",
@@ -252,7 +252,7 @@ const Contact = () => {
               <label
                 style={{
                   display: "block",
-                  color: "#64748b",
+                  color: "#8A8A8A",
                   fontSize: "12px",
                   fontFamily: "'Barlow', sans-serif",
                   letterSpacing: "1px",
@@ -282,7 +282,7 @@ const Contact = () => {
               <label
                 style={{
                   display: "block",
-                  color: "#64748b",
+                  color: "#8A8A8A",
                   fontSize: "12px",
                   fontFamily: "'Barlow', sans-serif",
                   letterSpacing: "1px",
@@ -313,7 +313,7 @@ const Contact = () => {
             <label
               style={{
                 display: "block",
-                color: "#64748b",
+                color: "#8A8A8A",
                 fontSize: "12px",
                 fontFamily: "'Barlow', sans-serif",
                 letterSpacing: "1px",
@@ -343,7 +343,7 @@ const Contact = () => {
             <label
               style={{
                 display: "block",
-                color: "#64748b",
+                color: "#8A8A8A",
                 fontSize: "12px",
                 fontFamily: "'Barlow', sans-serif",
                 letterSpacing: "1px",
@@ -466,5 +466,6 @@ const Contact = () => {
 };
 
 export default Contact;
+
 
 

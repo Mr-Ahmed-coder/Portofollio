@@ -5,7 +5,6 @@ const navItems = [
   { label: "About", target: "about-me" },
   { label: "Skills", target: "skills" },
   { label: "Projects", target: "projects" },
-  { label: "Services", target: "services" },
   { label: "Contact", target: "contact" },
 ];
 
@@ -148,3 +147,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

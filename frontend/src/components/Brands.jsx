@@ -37,7 +37,7 @@ const Brands = () => {
               flexShrink: 0,
             }}>✦</div>
             <span style={{
-              color: "#64748b",
+              color: "#8A8A8A",
               fontSize: "15px",
               fontWeight: i % 2 === 0 ? "600" : "800",
               letterSpacing: i % 2 === 0 ? "1px" : "2px",
