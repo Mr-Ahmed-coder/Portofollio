@@ -1,8 +1,26 @@
-import { useEffect, useRef, useState } from "react";
-import skillGroups from "../data/skills";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { currentlyLearning, skillCategories, solutions, strongestSkills } from "../data/skills";
+
+const SkillIcon = ({ skill }) => {
+  if (skill.icon) {
+    return (
+      <span className="skill-icon-frame" aria-hidden="true">
+        <img src={skill.icon} alt="" loading="lazy" decoding="async" />
+      </span>
+    );
+  }
+
+  return (
+    <span className="skill-icon-frame skill-icon-letter" aria-hidden="true">
+      {skill.iconLabel || skill.name.slice(0, 2).toUpperCase()}
+    </span>
+  );
+};
 
 const Skills = () => {
   const [visible, setVisible] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [query, setQuery] = useState("");
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -17,197 +35,150 @@ const Skills = () => {
     return () => observer.disconnect();
   }, []);
 
+  const filteredCategories = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+
+    return skillCategories
+      .filter((category) => activeCategory === "all" || category.id === activeCategory)
+      .map((category) => {
+        if (!normalizedQuery) return category;
+
+        return {
+          ...category,
+          skills: category.skills.filter((skill) =>
+            `${skill.name} ${category.title}`.toLowerCase().includes(normalizedQuery)
+          ),
+        };
+      })
+      .filter((category) => category.skills.length > 0);
+  }, [activeCategory, query]);
+
+  const totalSkills = skillCategories.reduce((total, category) => total + category.skills.length, 0);
+
   return (
     <section
       id="skills"
       ref={sectionRef}
-      style={{
-        background: "linear-gradient(180deg, #0d1535 0%, #091124 100%)",
-        padding: "100px 60px",
-        position: "relative",
-        overflow: "hidden",
-      }}
+      className={`skills-showcase section-padding ${visible ? "is-visible" : ""}`}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: "10%",
-          left: "5%",
-          width: "320px",
-          height: "320px",
-          background: "radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 72%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(24px)",
-          transition: "all 0.6s ease",
-          marginBottom: "52px",
-        }}
-      >
-        <div
-          style={{
-            display: "inline-block",
-            background: "rgba(14,165,233,0.12)",
-            border: "1px solid rgba(14,165,233,0.3)",
-            color: "#0ea5e9",
-            fontSize: "11px",
-            fontWeight: "700",
-            letterSpacing: "2px",
-            padding: "6px 16px",
-            borderRadius: "4px",
-            marginBottom: "14px",
-            fontFamily: "'Barlow', sans-serif",
-          }}
-        >
-          SKILLS
-        </div>
-
-        <h2
-          style={{
-            fontSize: "clamp(28px, 4vw, 48px)",
-            fontWeight: "900",
-            color: "#ffffff",
-            fontFamily: "'Barlow Condensed', sans-serif",
-            textTransform: "uppercase",
-            letterSpacing: "1px",
-            lineHeight: 1.1,
-            marginBottom: "16px",
-          }}
-        >
-          Modern <span style={{ color: "#0ea5e9" }}>Tech Stack</span> and Core Strengths
-        </h2>
-
-        <p
-          style={{
-            color: "#94a3b8",
-            maxWidth: "680px",
-            lineHeight: "1.8",
-            fontSize: "15px",
-            fontFamily: "'Barlow', sans-serif",
-          }}
-        >
-          A practical blend of frontend, backend, database, and collaboration skills
-          used to build clean, responsive, and reliable web applications.
-        </p>
-      </div>
-
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-          gap: "24px",
-        }}
-      >
-        {skillGroups.map((group, index) => (
-          <div
-            key={group.category}
-            style={{
-              background: "rgba(15,27,48,0.82)",
-              border: "1px solid rgba(14,165,233,0.14)",
-              borderRadius: "18px",
-              padding: "28px",
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(40px)",
-              transition: `all 0.5s ease ${index * 0.1}s`,
-              boxShadow: "0 12px 36px rgba(0,0,0,0.22)",
-            }}
-          >
-            <div
-              style={{
-                display: "inline-flex",
-                padding: "6px 12px",
-                borderRadius: "999px",
-                background: "rgba(14,165,233,0.12)",
-                border: "1px solid rgba(14,165,233,0.24)",
-                color: "#0ea5e9",
-                fontSize: "11px",
-                fontWeight: "700",
-                letterSpacing: "1px",
-                textTransform: "uppercase",
-                fontFamily: "'Barlow', sans-serif",
-                marginBottom: "16px",
-              }}
-            >
-              {group.category}
-            </div>
-
-            <p
-              style={{
-                color: "#94a3b8",
-                fontSize: "14px",
-                lineHeight: "1.75",
-                fontFamily: "'Barlow', sans-serif",
-                marginBottom: "24px",
-              }}
-            >
-              {group.description}
+      <div className="skills-showcase-inner">
+        <div className="skills-hero-panel">
+          <div>
+            <span className="skills-eyebrow">Skills & Capabilities</span>
+            <h2 className="section-title">Modern Stack. Practical Systems.</h2>
+            <p>
+              A recruiter-friendly view of the tools, workflows, and business solutions I use
+              to build responsive interfaces, APIs, dashboards, mobile apps, and management systems.
             </p>
+          </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
-              {group.skills.map((skill) => (
-                <div key={`${group.category}-${skill.name}`}>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginBottom: "8px",
-                      gap: "12px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "#e2e8f0",
-                        fontSize: "14px",
-                        fontWeight: "600",
-                        fontFamily: "'Barlow', sans-serif",
-                      }}
-                    >
-                      {skill.name}
-                    </span>
-                    <span
-                      style={{
-                        color: "#38bdf8",
-                        fontSize: "12px",
-                        fontWeight: "700",
-                        fontFamily: "'Barlow', sans-serif",
-                      }}
-                    >
-                      {skill.level}%
-                    </span>
-                  </div>
-
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "9px",
-                      borderRadius: "999px",
-                      background: "rgba(148,163,184,0.14)",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: `${skill.level}%`,
-                        height: "100%",
-                        borderRadius: "999px",
-                        background: "linear-gradient(135deg, #0ea5e9, #38bdf8)",
-                        boxShadow: "0 0 16px rgba(14,165,233,0.28)",
-                      }}
-                    />
-                  </div>
-                </div>
+          <div className="skills-strength-panel" aria-label="Strongest skills">
+            <span>Strongest focus</span>
+            <div>
+              {strongestSkills.map((skill) => (
+                <strong key={skill}>{skill}</strong>
               ))}
             </div>
           </div>
-        ))}
+        </div>
+
+        <div className="skills-toolbar" aria-label="Skills filters">
+          <div className="skills-search-box">
+            <span aria-hidden="true">Search</span>
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder={`Search ${totalSkills} skills...`}
+              aria-label="Search skills"
+            />
+          </div>
+
+          <div className="skills-filter-row">
+            <button
+              type="button"
+              className={activeCategory === "all" ? "active" : ""}
+              onClick={() => setActiveCategory("all")}
+            >
+              All
+            </button>
+            {skillCategories.map((category) => (
+              <button
+                key={category.id}
+                type="button"
+                className={activeCategory === category.id ? "active" : ""}
+                onClick={() => setActiveCategory(category.id)}
+              >
+                {category.title.replace(" Development", "")}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="skills-grid">
+          {filteredCategories.map((category, index) => (
+            <article
+              key={category.id}
+              className="skill-category-card"
+              style={{ "--skill-accent": category.accent, transitionDelay: `${index * 55}ms` }}
+            >
+              <div className="skill-card-header">
+                <span className="skill-card-marker" aria-hidden="true" />
+                <div>
+                  <h3>{category.title}</h3>
+                  <p>{category.summary}</p>
+                </div>
+              </div>
+
+              <div className="skill-chip-grid">
+                {category.skills.map((skill) => (
+                  <div key={skill.name} className={skill.strong ? "skill-chip strong" : "skill-chip"}>
+                    <SkillIcon skill={skill} />
+                    <span>{skill.name}</span>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {filteredCategories.length === 0 && (
+          <div className="skills-empty-state">
+            No matching skills found. Try another search term.
+          </div>
+        )}
+
+        <div className="skills-bottom-grid">
+          <div className="solutions-panel">
+            <div className="skills-section-heading">
+              <span>Solutions I Build</span>
+              <h3>Business-ready systems, not just technology demos.</h3>
+            </div>
+
+            <div className="solution-card-grid">
+              {solutions.map((solution) => (
+                <article key={solution.title} className="solution-card">
+                  <h4>{solution.title}</h4>
+                  <p>{solution.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <aside className="learning-panel">
+            <span>Currently Learning</span>
+            <h3>Sharpening the next layer</h3>
+            <div>
+              {currentlyLearning.map((item) => (
+                <p key={item}>{item}</p>
+              ))}
+            </div>
+          </aside>
+        </div>
       </div>
     </section>
   );
 };
 
 export default Skills;
+
