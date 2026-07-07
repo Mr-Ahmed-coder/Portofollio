@@ -1,21 +1,31 @@
 import { useEffect, useRef, useState } from "react";
 
-const stats = [
-  { value: "5 +", label: "Coursera" },
-  { value: "3 +", label: "Years Experience" },
-  { value: "30 +", label: "Projects Build" },
+const highlights = [
+  { icon: "FS", title: "Full-Stack Developer", text: "Frontend and backend workflows built with practical production needs in mind." },
+  { icon: "M", title: "MERN Stack Projects", text: "React, Node.js, Express, and MongoDB applications with clean structure." },
+  { icon: "B", title: "Business Systems", text: "Tools that help teams manage daily operations, data, and customer workflows." },
+  { icon: "P", title: "Frontend-Only Portfolio", text: "A fast, polished Vite portfolio prepared for clean static deployment." },
+];
+
+const quickStats = [
+  "8+ Projects Built",
+  "MERN Stack Focus",
+  "Real Client Systems",
+  "Uganda & Kenya Market Focus",
 ];
 
 const About = () => {
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef(null);
 
-  // Trigger animation when section scrolls into view
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
-      { threshold: 0.2 }
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { threshold: 0.18 }
     );
+
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
@@ -24,214 +34,220 @@ const About = () => {
     <section
       id="about-me"
       ref={sectionRef}
-      className="section-padding flex-stack-tablet"
+      className="section-padding"
       style={{
         background: "linear-gradient(180deg, #0B0B0B 0%, #111111 100%)",
         padding: "100px 60px",
-        display: "flex",
-        alignItems: "center",
-        gap: "80px",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      {/* Background glow */}
-      <div style={{
-        position: "absolute", bottom: "0", left: "25%",
-        width: "400px", height: "400px",
-        background: "radial-gradient(circle, rgba(14,165,233,0.07) 0%, transparent 70%)",
-        pointerEvents: "none",
-      }} />
-
-      {/* LEFT — Photo */}
-      <div style={{
-        flex: "0 0 380px",
-        position: "relative",
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateX(0)" : "translateX(-50px)",
-        
-        transition: "all 0.8s ease",
-      }}>
-        {/* Decorative ring */}
-        <div style={{
+      <div
+        aria-hidden="true"
+        style={{
           position: "absolute",
-          bottom: "-20px", left: "-20px",
-          width: "220px", height: "220px",
-          borderRadius: "50%",
-          border: "none",
-          background: `conic-gradient(
-            from 0deg,
-            #0ea5e9 0deg,
-            transparent 60deg,
-            #0ea5e9 120deg,
-            transparent 180deg,
-            #0ea5e9 240deg,
-            transparent 300deg,
-            #0ea5e9 360deg
-          )`,
-          opacity: 0.25,
-          animation: "spin 12s linear infinite",
-        }} />
-
-        {/* Photo box */}
-        <div style={{
+          inset: "auto auto 8% 12%",
           width: "360px",
-          height: "440px",
-          borderRadius: "16px",
-          overflow: "hidden",
-          boxShadow: "0 24px 80px rgba(0,0,0,0.4), 0 0 40px rgba(14,165,233,0.08)",
-          position: "relative", zIndex: 2,
-          backgroundImage: "url('/images/image2.jpeg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          border: "4px solid skyblue",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          flexDirection: "column", gap: "12px",
-        }}>
-          {/* 👇 Replace with your actual image */}
-          
-          {/* <img s  src="images/image1.jpeg" style={{ width:"100%", height:"100%", objectFit:"cover" }} /> */}
-          <div style={{ fontSize: "64px" }}></div>
-          <p style={{ color: "#7A7A7A", fontSize: "13px", fontFamily: "'Barlow', sans-serif" }}>
-            
-          </p>
-        </div>
-      </div>
+          height: "360px",
+          background: "radial-gradient(circle, rgba(14,165,233,0.08) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
 
-      {/* RIGHT — Content */}
-      <div style={{
-        flex: 1,
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateX(0)" : "translateX(50px)",
-        transition: "all 0.8s ease 0.2s",
-      }}>
-        {/* Section badge */}
-        <div style={{
-          display: "inline-block",
-          background: "rgba(14,165,233,0.12)",
-          border: "1px solid rgba(14,165,233,0.3)",
-          color: "#0ea5e9",
-          fontSize: "11px",
-          fontWeight: "700",
-          letterSpacing: "2px",
-          padding: "6px 16px",
-          borderRadius: "4px",
-          marginBottom: "20px",
-          fontFamily: "'Barlow', sans-serif",
-        }}>
-          ABOUT US
-        </div>
-
-        {/* Heading */}
-        <h2 className="section-title" style={{
-          fontSize: "clamp(28px, 3.5vw, 46px)",
-          fontWeight: "900",
-          color: "#ffffff",
-          lineHeight: 1.15,
-          fontFamily: " sans-serif",
-          textTransform: "uppercase",
-          marginBottom: "20px",
-        }}>
-          I AM Full-Stack {" "}
-          <span style={{ color: "#0ea5e9" }}><br />Developer</span>{" "}
-          
-        </h2>
-
-        {/* Description */}
-        <p style={{
-          color: "#94a3b8",
-          fontSize: "15px",
-          lineHeight: "1.85",
-          maxWidth: "500px",
-          marginBottom: "36px",
-          fontFamily: "'Barlow', sans-serif",
-        }}>
-          I am a passionate and growing developer focused on building modern web
-          applications with clean code, responsive interfaces, and practical
-          solutions that create real value for users and businesses.
-        </p>
-
-        {/* Stats */}
-        <div style={{
-          display: "flex",
-          gap: "16px",
-          marginBottom: "36px",
-          flexWrap: "wrap",
-        }}>
-          {stats.map((stat, i) => (
-            <div key={i} style={{
-              padding: "18px 24px",
-              background: "rgba(14,165,233,0.06)",
-              border: "1px solid rgba(14,165,233,0.18)",
-              borderRadius: "10px",
-              textAlign: "center",
-              minWidth: "110px",
-              transition: "all 0.3s ease",
-              cursor: "default",
+      <div
+        className="about-premium-grid"
+        style={{
+          maxWidth: "1160px",
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 0.9fr) minmax(360px, 1.1fr)",
+          gap: "42px",
+          alignItems: "start",
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        <div
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(18px)",
+            transition: "opacity 0.65s ease, transform 0.65s ease",
+          }}
+        >
+          <div
+            style={{
+              display: "inline-block",
+              background: "rgba(14,165,233,0.12)",
+              border: "1px solid rgba(14,165,233,0.3)",
+              color: "#0ea5e9",
+              fontSize: "11px",
+              fontWeight: "700",
+              letterSpacing: "2px",
+              padding: "6px 16px",
+              borderRadius: "4px",
+              marginBottom: "18px",
+              fontFamily: "'Barlow', sans-serif",
             }}
-              onMouseEnter={e => {
-                e.currentTarget.style.background = "rgba(14,165,233,0.12)";
-                e.currentTarget.style.borderColor = "rgba(14,165,233,0.4)";
-                e.currentTarget.style.transform = "translateY(-4px)";
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.background = "rgba(14,165,233,0.06)";
-                e.currentTarget.style.borderColor = "rgba(14,165,233,0.18)";
-                e.currentTarget.style.transform = "translateY(0)";
+          >
+            ABOUT
+          </div>
+
+          <h2
+            className="section-title"
+            style={{
+              fontSize: "clamp(30px, 4vw, 48px)",
+              fontWeight: "900",
+              color: "#ffffff",
+              lineHeight: 1.08,
+              fontFamily: "'Barlow Condensed', sans-serif",
+              textTransform: "uppercase",
+              letterSpacing: "0.5px",
+              marginBottom: "22px",
+            }}
+          >
+            Practical software for <span style={{ color: "#0ea5e9" }}>real business needs</span>
+          </h2>
+
+          <p
+            style={{
+              color: "#cbd5e1",
+              fontSize: "16px",
+              lineHeight: "1.8",
+              maxWidth: "620px",
+              marginBottom: "28px",
+              fontFamily: "'Barlow', sans-serif",
+            }}
+          >
+            Hi, I'm Ahmed Mohamed, a full-stack developer focused on building modern web applications and practical business management systems. I work mainly with React, Node.js, Express, and MongoDB, and I enjoy turning real business problems into clean, usable software.
+          </p>
+
+          <div className="about-stat-row" style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+            {quickStats.map((stat) => (
+              <span
+                key={stat}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  minHeight: "34px",
+                  padding: "0 13px",
+                  borderRadius: "999px",
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.09)",
+                  color: "#e2e8f0",
+                  fontSize: "12px",
+                  fontWeight: "700",
+                  fontFamily: "'Barlow', sans-serif",
+                }}
+              >
+                {stat}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div
+          className="about-highlight-grid"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+            gap: "16px",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(22px)",
+            transition: "opacity 0.7s ease 0.12s, transform 0.7s ease 0.12s",
+          }}
+        >
+          {highlights.map((item) => (
+            <article
+              key={item.title}
+              className="about-highlight-card"
+              style={{
+                minHeight: "158px",
+                padding: "22px",
+                borderRadius: "18px",
+                background: "rgba(255,255,255,0.055)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.24)",
+                backdropFilter: "blur(14px)",
+                WebkitBackdropFilter: "blur(14px)",
+                transition: "transform 0.28s ease, border-color 0.28s ease, background 0.28s ease, box-shadow 0.28s ease",
               }}
             >
-              <div style={{
-                fontSize: "26px", fontWeight: "900",
-                color: "#ffffff",
-                fontFamily: "'Barlow Condensed', sans-serif",
-                letterSpacing: "1px",
-              }}>{stat.value}</div>
-              <div style={{
-                fontSize: "11px", color: "#8A8A8A",
-                fontFamily: "'Barlow', sans-serif",
-                marginTop: "4px", letterSpacing: "0.5px",
-              }}>{stat.label}</div>
-            </div>
+              <div
+                style={{
+                  width: "42px",
+                  height: "42px",
+                  borderRadius: "12px",
+                  display: "grid",
+                  placeItems: "center",
+                  background: "rgba(14,165,233,0.12)",
+                  border: "1px solid rgba(14,165,233,0.22)",
+                  color: "#38bdf8",
+                  fontSize: "13px",
+                  fontWeight: "900",
+                  fontFamily: "'Barlow', sans-serif",
+                  marginBottom: "18px",
+                }}
+              >
+                {item.icon}
+              </div>
+
+              <h3
+                style={{
+                  color: "#ffffff",
+                  fontSize: "17px",
+                  fontWeight: "800",
+                  fontFamily: "'Barlow', sans-serif",
+                  marginBottom: "8px",
+                }}
+              >
+                {item.title}
+              </h3>
+
+              <p
+                style={{
+                  color: "#94a3b8",
+                  fontSize: "14px",
+                  lineHeight: "1.65",
+                  fontFamily: "'Barlow', sans-serif",
+                }}
+              >
+                {item.text}
+              </p>
+            </article>
           ))}
         </div>
-
-        {/* CTA */}
-        <button style={{
-          display: "flex", alignItems: "center", gap: "10px",
-          padding: "14px 32px",
-          background: "linear-gradient(135deg, #0ea5e9, #0369a1)",
-          color: "#fff",
-          border: "none",
-          borderRadius: "50px",
-          fontSize: "14px",
-          fontWeight: "700",
-          letterSpacing: "1px",
-          cursor: "pointer",
-          fontFamily: "'Barlow', sans-serif",
-          boxShadow: "0 0 30px rgba(14,165,233,0.35)",
-          transition: "all 0.3s ease",
-        }}
-          onMouseEnter={e => {
-            e.currentTarget.style.transform = "translateY(-3px)";
-            e.currentTarget.style.boxShadow = "0 0 45px rgba(14,165,233,0.5)";
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow = "0 0 30px rgba(14,165,233,0.35)";
-          }}
-            onClick={() => window.location.href = "mailto:engahmedmohamedali24@gmail.com"}
-
-        >
-          GET IN TOUCH <span>→</span>
-          
-        </button>
-        
       </div>
 
       <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+        .about-highlight-card:hover {
+          transform: translateY(-5px);
+          background: rgba(255,255,255,0.075) !important;
+          border-color: rgba(14,165,233,0.24) !important;
+          box-shadow: 0 26px 72px rgba(0,0,0,0.32), 0 0 32px rgba(14,165,233,0.08) !important;
+        }
+
+        @media (max-width: 980px) {
+          .about-premium-grid {
+            grid-template-columns: 1fr !important;
+            gap: 34px !important;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .about-highlight-grid {
+            grid-template-columns: 1fr !important;
+          }
+
+          .about-stat-row {
+            gap: 8px !important;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .about-highlight-card,
+          .about-premium-grid * {
+            transition: none !important;
+          }
         }
       `}</style>
     </section>
@@ -239,4 +255,3 @@ const About = () => {
 };
 
 export default About;
-

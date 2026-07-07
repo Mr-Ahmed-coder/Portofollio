@@ -74,8 +74,7 @@ const Navbar = () => {
   };
 
   const openHireMe = () => {
-    window.open("https://wa.me/25674844459", "_blank", "noopener,noreferrer");
-    setMenuOpen(false);
+    scrollToSection("contact");
   };
 
   return (
@@ -94,7 +93,6 @@ const Navbar = () => {
             <button
               key={item.target}
               type="button"
-              role="listitem"
               className={activeSection === item.target ? "nav-link active" : "nav-link"}
               onClick={() => scrollToSection(item.target)}
               aria-current={activeSection === item.target ? "page" : undefined}
@@ -124,7 +122,7 @@ const Navbar = () => {
         </div>
       </nav>
 
-      <div id="mobile-menu" className={menuOpen ? "mobile-menu is-open" : "mobile-menu"}>
+      <div id="mobile-menu" className={menuOpen ? "mobile-menu is-open" : "mobile-menu"} aria-hidden={!menuOpen}>
         <div className="mobile-menu-panel">
           {navItems.map((item) => (
             <button
@@ -147,5 +145,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
